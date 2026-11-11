@@ -24,5 +24,6 @@ Code phân tích output của AI bằng các chữ này, nên phải giữ nguy�
 
 ## Thay đổi riêng so với bản gốc
 - Thông báo ước tính số token mỗi lần điện thoại gọi AI.
-- Ẩn app Âm nhạc, Máy ảnh, Lịch, Nhật ký khỏi màn hình chính.
+- Ẩn app Bản đồ, Âm nhạc, Máy ảnh, Lịch, Nhật ký khỏi màn hình chính.
+- Thêm app **Locket** (ảnh bằng chữ, thả emoji, nhắn lại, tuỳ chọn cho NPC trong danh bạ cùng đăng).
 - Thêm 2 app (ý tưởng từ 兔k机 EPhone, code viết lại): **Xem điện thoại** (tin nhắn NPC, giỏ hàng, ghi chú, trình duyệt, album, ví, dấu chân, nhật ký sử dụng, nhật ký) và **Không gian tình nhân** (lời nhắn, album, thư). Dữ liệu lưu trong biến chat `ab_tuk` (riêng từng đoạn chat).
