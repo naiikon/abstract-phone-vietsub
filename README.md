@@ -21,3 +21,8 @@ Code phân tích output của AI bằng các chữ này, nên phải giữ nguy�
 - Cú pháp nhãn world book: `<前置>`, `<后置>`, `<人物|…>`, `<页面|…>`
 - Tên các mục world book / regex script phone tự tạo (`[auto_message]主动发消息指令`, `手机-消息美化`…) để không tạo trùng với mục cũ
 - Tiền tố `群:` khi chèn tin nhắn nhóm trong truyện, tên dự phòng `用户`
+
+## Thay đổi riêng so với bản gốc
+- Thông báo ước tính số token mỗi lần điện thoại gọi AI.
+- Ẩn app Âm nhạc, Máy ảnh, Lịch, Nhật ký khỏi màn hình chính.
+- Thêm 2 app (ý tưởng từ 兔k机 EPhone, code viết lại): **Xem điện thoại** (tin nhắn NPC, giỏ hàng, ghi chú, trình duyệt, album, ví, dấu chân, nhật ký sử dụng, nhật ký) và **Không gian tình nhân** (lời nhắn, album, thư). Dữ liệu lưu trong biến chat `ab_tuk` (riêng từng đoạn chat).
