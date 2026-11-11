@@ -78,6 +78,10 @@ const CSS=`
 .abx-x{position:absolute;top:6px;right:6px;width:22px;height:22px;border:none;border-radius:50%;background:transparent;color:#94a3b8;cursor:pointer;font-size:11px}
 .abx-hx{position:static;width:30px;height:30px;border-radius:9px;background:rgba(143,184,237,.12);font-size:13px;color:#8fb8ed}
 .abx-x.sure{background:#ef4444;color:#fff}
+.abx-diary{position:relative;padding:27px 14px 30px 64px;border-radius:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(143,184,237,.2);color:#3b4a5e;font-size:14px;line-height:26px;word-break:break-word;
+background:url('https://i.postimg.cc/Kz5V1k23/21.jpg') 0 0/450px auto no-repeat,linear-gradient(to right,transparent 54px,#e8a0a8 54px,#e8a0a8 56px,transparent 56px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,#a9cbe3 25px,#a9cbe3 26px) 0 28px,#f9f9f9}
+.abx-diary .dh{color:#7a8ba3;font-size:12.5px;height:26px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:20px}
+.abx-diary .c{white-space:pre-wrap}
 .abx-empty{text-align:center;color:#94a3b8;padding:40px 16px}
 .abx-btn{white-space:nowrap;flex-shrink:0;border:none;border-radius:10px;padding:8px 14px;background:#3b82f6;color:#fff;font-size:13px;cursor:pointer}
 .abx-btn.pink{background:#f472b6}.abx-btn.ghost{background:rgba(0,0,0,.07);color:#475569}
@@ -137,7 +141,7 @@ const PA={
  shoppingCart:{label:'Giỏ hàng',icon:'fa-shopping-cart',color:'#ef4444',desc:()=>'3 đến 5 món hàng bạn vừa thêm vào giỏ hàng gần đây',schema:()=>'{"shoppingCart":[{"name":"tên sản phẩm","price":123.45,"store":"tên cửa hàng"}]}'},
  memos:{label:'Ghi chú',icon:'fa-sticky-note',color:'#f59e0b',desc:()=>'2 đến 3 ghi chú ngắn bạn mới viết trong điện thoại',schema:()=>'{"memos":[{"title":"tiêu đề","content":"nội dung chi tiết"}]}'},
  browserHistory:{label:'Trình duyệt',icon:'fa-compass',color:'#3b82f6',desc:()=>'2 đến 3 lịch sử tìm kiếm trình duyệt gần đây của bạn, kèm nội dung bài viết/kết quả đã xem',schema:()=>'{"browserHistory":[{"query":"từ khoá tìm kiếm","result":"nội dung bài viết mô phỏng"}]}'},
- photoAlbum:{label:'Album',icon:'fa-images',color:'#84cc16',desc:()=>'mô tả bằng chữ cho 2 đến 3 tấm ảnh mới trong album điện thoại của bạn',schema:()=>'{"photoAlbum":[{"hiddenContent":"mô tả chi tiết khung hình của tấm ảnh"}]}'},
+ photoAlbum:{label:'Album',icon:'fa-images',color:'#84cc16',desc:()=>'2 đến 3 tấm ảnh mới trong album điện thoại của bạn. Mỗi ảnh mô tả NGẮN GỌN đúng 2 câu, tổng khoảng 35-55 chữ: câu 1 tả khung hình chính (chụp gì, góc nào), câu 2 nói lý do chụp hoặc cảm xúc ẩn sau. Không kể lể chi tiết thừa. Ví dụ: “Ảnh chụp những đống củi chẻ xếp ngay ngắn sát vách gỗ, cạnh ba thang thuốc bọc giấy cẩn thận. Chụp lại để kiểm tra lượng củi và thuốc dự trữ cho người ấy qua những ngày giá rét.”',schema:()=>'{"photoAlbum":[{"hiddenContent":"mô tả chi tiết khung hình của tấm ảnh"}]}'},
  bank:{label:'Ví',icon:'fa-wallet',color:'#e11d48',desc:(c,d)=>d.bank&&arr(d.bank.transactions).length?`3 đến 5 giao dịch hoàn toàn mới (Thu nhập hoặc Chi tiêu). Số dư hiện tại của bạn là ${Number(d.bank.balance||0).toFixed(2)}`:'một số dư ví ban đầu phù hợp thiết lập nhân vật, cùng 3 đến 5 giao dịch gần đây',schema:(c,d)=>d.bank&&arr(d.bank.transactions).length?'{"bank":{"transactions":[{"type":"Thu nhập hoặc Chi tiêu","amount":123.45,"description":"mô tả giao dịch"}]}}':'{"bank":{"balance":12345.67,"transactions":[{"type":"Thu nhập hoặc Chi tiêu","amount":123.45,"description":"mô tả giao dịch"}]}}'},
  trajectory:{label:'Dấu chân',icon:'fa-map-marker-alt',color:'#92400e',desc:()=>'2 đến 4 bản ghi lộ trình di chuyển gần đây của bạn',schema:()=>'{"trajectory":[{"time":"khoảng thời gian","location":"địa điểm","activity":"đã làm gì"}]}'},
  appUsage:{label:'Nhật ký sử dụng',icon:'fa-clock',color:'#64748b',desc:()=>'3 đến 5 bản ghi sử dụng ứng dụng gần đây của bạn',schema:()=>'{"appUsage":[{"appName":"tên ứng dụng","duration":"thời lượng sử dụng"}]}'},
@@ -161,7 +165,7 @@ const phoneList=(k,d,ch,sub)=>{const x=i=>`<button class="abx-x" data-i="${i}"><
   if(k==='photoAlbum')return L.map((m,i)=>`<div class="abx-card">${x(i)}<div class="abx-photo-txt"><i class="fas fa-image"></i><br>${esc(m.hiddenContent||m.description||'')}</div></div>`).join('');
   if(k==='trajectory')return`<div class="abx-tl">${L.map((m,i)=>`<div class="abx-card">${x(i)}<div class="s">${esc(m.time)}</div><div class="h">${esc(m.location)}</div><div class="c">${esc(m.activity)}</div></div>`).join('')}</div>`;
   if(k==='appUsage')return L.map((m,i)=>`<div class="abx-card">${x(i)}<div class="abx-row" style="justify-content:space-between;padding-right:20px"><b>${esc(m.appName)}</b><span class="s">${esc(m.duration)}</span></div></div>`).join('');
-  if(k==='diary')return L.map((m,i)=>`<div class="abx-card">${x(i)}<div class="s">${esc(m.date||'')}${m.weather?' · '+esc(m.weather):''}</div><div class="c">${esc(m.content)}</div></div>`).join('');
+  if(k==='diary')return L.map((m,i)=>`<div class="abx-diary">${x(i)}<div class="dh">${esc(m.date||'')}${m.weather?' · '+esc(m.weather):''}</div><div class="c">${esc(String(m.content||'').replace(/\n{2,}/g,'\n'))}</div></div>`).join('');
   return''};
 const phonePage=(ch,k,sub)=>{const a=PA[k];const c=charData(ch.name);const d=c.phone;const inner=phoneList(k,d,ch,sub);
   const title=sub!=null&&k==='chats'&&arr(d.chats)[sub]?arr(d.chats)[sub].contactName:a.label;
