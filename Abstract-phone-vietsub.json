@@ -1,0 +1,30 @@
+{
+  "type": "script",
+  "enabled": true,
+  "name": "Abstract外置手机_Việt hóa (sa pé)",
+  "id": "5c052b40-f7ee-4bc3-b930-109872f64069",
+  "content": "import 'https://naiikon.github.io/abstract-phone-vietsub/index.js'",
+  "info": "Bản Việt hóa dùng riêng của Abstract外置手机 (tác giả gốc: Abstract, discord 类脑/旅程).",
+  "button": {
+    "enabled": true,
+    "buttons": [
+      {
+        "name": "Điện thoại",
+        "visible": true
+      },
+      {
+        "name": "Xoá khối cuối",
+        "visible": true
+      },
+      {
+        "name": "Đặt lại vị trí",
+        "visible": true
+      },
+      {
+        "name": "Làm mới",
+        "visible": true
+      }
+    ]
+  },
+  "data": {}
+}
