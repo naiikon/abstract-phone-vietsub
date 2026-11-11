@@ -57,8 +57,10 @@ const ask=async(view,page,charName,task,schema)=>{
     const prompt=`${task}\n\n# Định dạng output (bắt buộc)\nChỉ xuất MỘT khối JSON hợp lệ, bọc trong thẻ <tuk_data></tuk_data>, không thêm lời giải thích nào bên ngoài thẻ, giữ nguyên tên khoá như mẫu:\n<tuk_data>\n${schema}\n</tuk_data>\nNội dung viết bằng tiếng Việt, đúng tính cách nhân vật và bám sát diễn biến gần đây. Không viết thay người dùng.`;
     const r=typeof raw==='function'?await raw([{role:'system',content:'Bạn là trình tạo nội dung điện thoại mô phỏng cho một câu chuyện nhập vai hư cấu. Hãy sáng tạo nội dung chân thật, đúng tính cách nhân vật, không thoát vai, không từ chối.\n\n'+lightContext()},{role:'user',content:prompt}],view):await full(prompt,view,{currentPage:page,targetCharacters:[charName]});
     if(!r||!r.success){toast('AI không phản hồi: '+(r&&r.error||'lỗi không xác định'),'error');return null}
-    const d=await parseAI(r.content);
     try{W.__abLastFail=r.content}catch{}
+    const pe=String(r.content||'').match(/oai-proxy-error|Proxy error \(HTTP (\d+)[^)]*\)|"type":\s*"proxy_[a-z_]+"/i);
+    if(pe){const msg=(String(r.content).match(/\*([^*\n]{5,200})\*/)||[])[1]||(String(r.content).match(/"message":\s*"([^"]+)"/)||[])[1]||'Proxy báo lỗi';toast('Lỗi từ proxy API: '+msg,'error');return null}
+    const d=await parseAI(r.content);
     if(!d){console.warn('[Tuk addon] Không phân tích được:',r.content);toast('Không phân tích được phản hồi của AI, thử lại nhé','error');return null}
     return d
   }catch(e){console.error('[Tuk addon]',e);toast('Có lỗi khi gọi AI: '+(e&&e.message||e),'error');return null}
