@@ -57,25 +57,26 @@ const ask=async(view,page,charName,task,schema)=>{
 
 /* ---------- khung giao diện ---------- */
 const CSS=`
-.abx{position:absolute;left:0;right:0;top:24px;bottom:0;z-index:150;display:flex;flex-direction:column;background:#f2f3f7;color:#1f2937;font-size:13px;line-height:1.5;overflow:hidden}
+.abx{position:absolute;left:0;right:0;top:24px;bottom:0;z-index:150;display:flex;flex-direction:column;background:linear-gradient(180deg,#E8F4FD 0%,#F0F7FC 100%);color:#1f2937;font-size:13px;line-height:1.5;overflow:hidden}
 .abx *{box-sizing:border-box}
 .abx-love{background:linear-gradient(160deg,#ffe3ec 0%,#fff3e6 55%,#ffe9f3 100%)}
-.abx-hd{display:flex;align-items:center;gap:6px;padding:8px 10px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,.06);flex-shrink:0}
+.abx-hd{display:flex;align-items:center;gap:6px;padding:8px 10px;background:hsla(0,0%,100%,.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(143,184,237,.15);flex-shrink:0}
+.abx-hd .t{color:#475569}
 .abx-hd .t{flex:1;font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
-.abx-ib{width:30px;height:30px;border:none;border-radius:9px;background:rgba(0,0,0,.06);color:#475569;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.abx-ib{width:30px;height:30px;border:none;border-radius:9px;background:rgba(143,184,237,.12);color:#8fb8ed;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 .abx-ib:active{transform:scale(.94)}
 .abx-ib.warn{background:#fecaca;color:#b91c1c}
 .abx-body{flex:1;overflow-y:auto;padding:12px}
 .abx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 8px;padding-top:10px}
 .abx-app{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
-.abx-app .ic{width:52px;height:52px;border-radius:14px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;font-size:22px}
+.abx-app .ic{width:52px;height:52px;border-radius:14px;background:hsla(0,0%,100%,.85);border:1px solid rgba(143,184,237,.25);box-shadow:0 3px 10px rgba(143,184,237,.25);display:flex;align-items:center;justify-content:center;font-size:22px}
 .abx-app span{font-size:12px;color:#334155;text-align:center}
-.abx-card{background:rgba(255,255,255,.92);border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);position:relative;word-break:break-word}
+.abx-card{background:hsla(0,0%,100%,.85);border:1px solid hsla(0,0%,100%,.6);border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(143,184,237,.15);position:relative;word-break:break-word}
 .abx-card .h{font-weight:600;margin-bottom:2px;padding-right:22px}
 .abx-card .s{color:#64748b;font-size:12px}
 .abx-card .c{white-space:pre-wrap}
 .abx-x{position:absolute;top:6px;right:6px;width:22px;height:22px;border:none;border-radius:50%;background:transparent;color:#94a3b8;cursor:pointer;font-size:11px}
-.abx-hx{position:static;width:30px;height:30px;border-radius:9px;background:rgba(0,0,0,.06);font-size:13px;color:#475569}
+.abx-hx{position:static;width:30px;height:30px;border-radius:9px;background:rgba(143,184,237,.12);font-size:13px;color:#8fb8ed}
 .abx-x.sure{background:#ef4444;color:#fff}
 .abx-empty{text-align:center;color:#94a3b8;padding:40px 16px}
 .abx-btn{white-space:nowrap;flex-shrink:0;border:none;border-radius:10px;padding:8px 14px;background:#3b82f6;color:#fff;font-size:13px;cursor:pointer}
@@ -110,7 +111,7 @@ const CSS=`
 .abx-fab .a{background:#f472b6}.abx-fab .b{background:#a78bfa}
 .abx-photo{width:100%;border-radius:10px;margin:6px 0;display:block}
 .abx-photo-txt{background:linear-gradient(135deg,#fde68a,#fbcfe8);border-radius:10px;padding:18px 12px;margin:6px 0;font-style:italic;color:#7c2d12;text-align:center}
-.abx-pick{display:flex;align-items:center;gap:10px;padding:10px;background:#fff;border-radius:12px;margin-bottom:8px;cursor:pointer}
+.abx-pick{display:flex;align-items:center;gap:10px;padding:10px;background:hsla(0,0%,100%,.85);border:1px solid rgba(143,184,237,.2);border-radius:12px;margin-bottom:8px;cursor:pointer}
 `;
 let overlay=null,busyEl=null;
 const showBusy=on=>{busyEl&&busyEl.classList.toggle('on',!!on)};
@@ -320,6 +321,7 @@ const lkView=(filter,mode)=>{const{user,chars}=people();const d=lkLoad();
 /* ---------- gắn icon vào màn hình chính ---------- */
 const ICONS=[['phone','Xem điện thoại','fa-mobile-alt',()=>{if(openOverlay(''))pickChar('Xem điện thoại',phoneHome)}],['love','Tình nhân','fa-heart',()=>{if(openOverlay('abx-love'))pickChar('Không gian tình nhân',x=>loveView(x))}],['locket','Locket','fa-camera-retro',()=>{if(openOverlay('abx-lk'))lkView('')}]];
 const ensureIcons=()=>{try{const root=getRoot();if(!root)return;const grid=root.querySelector('.app-grid');if(!grid)return;
+  if(!root.querySelector('style[data-abx-grid]')){const st=D.createElement('style');st.setAttribute('data-abx-grid','1');st.textContent='.app-grid .app-block{justify-content:flex-start!important}.app-grid .app-block span{line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}';root.appendChild(st)}
   if(overlay&&!overlay.isConnected){overlay=null;busyEl=null}
   const tpl=[...grid.querySelectorAll('.app-block:not([data-abx])')].find(b=>b.style.display!=='none');if(!tpl)return;
   for(const[k,label,icon,fn]of ICONS){if(grid.querySelector(`[data-abx="${k}"]`))continue;
