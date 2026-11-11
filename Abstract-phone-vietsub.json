@@ -3,7 +3,7 @@
   "enabled": true,
   "name": "Abstract外置手机_Việt hóa (sa pé)",
   "id": "5c052b40-f7ee-4bc3-b930-109872f64069",
-  "content": "import 'https://naiikon.github.io/abstract-phone-vietsub/index.js'",
+  "content": "import(`https://naiikon.github.io/abstract-phone-vietsub/index.js?v=${Math.floor(Date.now()/6e4)}`);",
   "info": "Bản Việt hóa dùng riêng của Abstract外置手机 (tác giả gốc: Abstract, discord 类脑/旅程).",
   "button": {
     "enabled": true,

@@ -10,7 +10,7 @@ Bản Việt hóa **giao diện + prompt AI** của *Abstract外置手机* (【�
 Import file `Abstract-phone-vietsub.json` vào Tavern Helper → Script, hoặc tạo script mới với nội dung:
 
 ```js
-import 'https://naiikon.github.io/abstract-phone-vietsub/index.js'
+import(`https://naiikon.github.io/abstract-phone-vietsub/index.js?v=${Math.floor(Date.now()/6e4)}`);
 ```
 
 Tắt script gốc (bản tiếng Trung) để tránh chạy 2 phone cùng lúc.
