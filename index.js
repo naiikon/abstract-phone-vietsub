@@ -79,7 +79,7 @@ const CSS=`
 .abx-hx{position:static;width:30px;height:30px;border-radius:9px;background:rgba(143,184,237,.12);font-size:13px;color:#8fb8ed}
 .abx-x.sure{background:#ef4444;color:#fff}
 .abx-diary{position:relative;padding:27px 14px 30px 64px;border-radius:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(143,184,237,.2);color:#3b4a5e;font-size:14px;line-height:26px;word-break:break-word;
-background:url('https://i.postimg.cc/Kz5V1k23/21.jpg') 0 0/450px auto no-repeat,linear-gradient(to right,transparent 54px,#e8a0a8 54px,#e8a0a8 56px,transparent 56px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,#a9cbe3 25px,#a9cbe3 26px) 0 28px,#f9f9f9}
+background:url('https://naiikon.github.io/abstract-phone-vietsub/diary-paper.jpg') 0 0/450px auto no-repeat,linear-gradient(to right,transparent 54px,#e8a0a8 54px,#e8a0a8 56px,transparent 56px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,#a9cbe3 25px,#a9cbe3 26px) 0 28px,#f9f9f9}
 .abx-diary .dh{color:#7a8ba3;font-size:12.5px;height:26px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:20px}
 .abx-diary .c{white-space:pre-wrap}
 .abx-empty{text-align:center;color:#94a3b8;padding:40px 16px}
