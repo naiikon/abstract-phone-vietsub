@@ -27,3 +27,4 @@ Code phân tích output của AI bằng các chữ này, nên phải giữ nguy�
 - Ẩn app Bản đồ, Âm nhạc, Máy ảnh, Lịch, Nhật ký khỏi màn hình chính.
 - Thêm app **Locket** (ảnh bằng chữ, thả emoji, nhắn lại, tuỳ chọn cho NPC trong danh bạ cùng đăng).
 - Thêm 2 app (ý tưởng từ 兔k机 EPhone, code viết lại): **Xem điện thoại** (tin nhắn NPC, giỏ hàng, ghi chú, trình duyệt, album, ví, dấu chân, nhật ký sử dụng, nhật ký) và **Không gian tình nhân** (lời nhắn, album, thư). Dữ liệu lưu trong biến chat `ab_tuk` (riêng từng đoạn chat).
+- **Chế độ phiên chat** (Cài đặt → Lịch sử hội thoại, bật mặc định): tin đầu khi mở chat gửi đủ lịch sử truyện; các tin sau trong 15 phút chỉ gửi 3 tầng truyện cuối, lịch sử chat điện thoại vẫn đủ. Đóng/mở bằng nút Điện thoại hoặc truyện chính thêm >2 tầng thì bắt đầu phiên mới.
