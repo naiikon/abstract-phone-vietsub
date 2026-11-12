@@ -368,14 +368,14 @@ globalThis.__abSessCfg=function(n){const cfg=n&&n.historyConfig||{maxMessages:30
     globalThis.__abSessLight=!0;return{...cfg,storyLast:3}}catch(e){console.warn('[Phiên chat]',e);return cfg}};
 try{eventOn(getButtonEvent('Điện thoại'),()=>{SESS=null})}catch{}
 const ensureSess=()=>{try{const root=getRoot();if(!root)return;
-  const t=[...root.querySelectorAll('.nav-title')].find(x=>x.textContent.trim()==='Lịch sử hội thoại');if(!t)return;
-  const page=t.closest('.detail-page')||t.parentElement&&t.parentElement.parentElement;if(!page||page.querySelector('[data-abx-sess]'))return;
-  const box=page.querySelector('.detail-content')||page.lastElementChild;if(!box)return;
+  for(const t of root.querySelectorAll('.nav-title')){if(t.textContent.trim()!=='Lịch sử hội thoại')continue;
+  const page=t.closest('.detail-page')||t.parentElement&&t.parentElement.parentElement;if(!page||page.querySelector('[data-abx-sess]'))continue;
+  const box=page.querySelector('.history-config-section')?.parentElement||page.querySelector('.detail-content')||page.lastElementChild;if(!box)continue;
   const c=D.createElement('div');c.setAttribute('data-abx-sess','1');
   c.style.cssText='margin:0 0 12px;padding:12px 14px;border-radius:14px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06);font-size:13px;line-height:1.5;color:#334';
   c.innerHTML='<label style="display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer"><b style="font-size:14px">Chế độ phiên chat (tiết kiệm token)</b><input type="checkbox" style="width:20px;height:20px;flex:none"></label><div style="color:#667;margin-top:4px">Tin đầu tiên khi mở chat gửi đủ lịch sử truyện. Các tin sau (trong 15 phút, cùng người chat) chỉ gửi 3 tầng truyện cuối, lịch sử chat điện thoại vẫn giữ đủ. Bấm nút Điện thoại để đóng/mở hoặc truyện chính thêm hơn 2 tầng thì phiên mới bắt đầu lại. Thấy nhân vật quên chuyện cũ thì tắt đi.</div>';
   const cb=c.querySelector('input');cb.checked=on();cb.addEventListener('change',()=>{try{localStorage.setItem(SK,cb.checked?'1':'0')}catch{}SESS=null;try{toastr.info(cb.checked?'Đã bật chế độ phiên chat':'Đã tắt chế độ phiên chat')}catch{}});
-  box.insertBefore(c,box.firstChild)}catch(e){console.warn('[Phiên chat] ui:',e)}};
+  box.insertBefore(c,box.firstChild)}}catch(e){console.warn('[Phiên chat] ui:',e)}};
 setInterval(ensureSess,1000);})();
 ;globalThis.__abYamlFix=function(src){
   const fix=t=>{const L=String(t).split('\n'),out=[];let blk=-1;
