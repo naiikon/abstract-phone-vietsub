@@ -356,7 +356,7 @@ console.info('[Tuk addon] Đã nạp: Xem điện thoại + Không gian tình nh
 }catch(e){console.error('[Tuk addon] Lỗi khởi tạo:',e)}})();
 
 /* ---------- chế độ phiên chat: tin đầu gửi đủ, các tin sau chỉ gửi 3 tầng truyện cuối (giữ nguyên lịch sử chat điện thoại) ---------- */
-(()=>{const SK='ab_sess_mode',TTL=15*60e3;let SESS=null;
+(()=>{const SK='ab_sess_mode',TTL=15*60e3;let SESS=null;const D=document;const getRoot=()=>{const h=D.querySelector('[id^="improved-phone-shadow-host-"]');return h&&h.shadowRoot||null};
 const on=()=>{try{return localStorage.getItem(SK)!=='0'}catch{return!0}};
 globalThis.__abSessCfg=function(n){const cfg=n&&n.historyConfig||{maxMessages:30,includeSystem:!1};globalThis.__abSessLight=!1;
   try{const v=n.currentView;if(!on()||(v!=='privateChat'&&v!=='groupChat'))return cfg;
